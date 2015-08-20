@@ -1,4 +1,6 @@
-// Caching
+/**
+ * Selector Caching Test
+ */
 function withoutCache( iterations ) {
 	var
 		i          = 0,
@@ -34,7 +36,9 @@ function withCache() {
 
 
 
-// Appending and caching
+/**
+ * Selector Caching and Appending Test
+ */
 function withoutCacheAppend( iterations ) {
 	var
 		i          = 0,
@@ -101,7 +105,11 @@ function withCacheAppendMore() {
 	console.timeEnd('checkTest');
 }
 
-//each vs for
+
+
+/**
+ * $.each vs for
+ */
 function addElems() {
 	var
 		body = $('body'),
@@ -145,4 +153,61 @@ function jqueryEach() {
 		});
 	}
 	console.timeEnd('jQuery Each');
+}
+
+
+
+/**
+ * Form selection
+ */
+function selectOnlyInputs() {
+	$('input').each(function() {
+		var
+			$this = $( this ),
+			type  = this.type;
+
+		if( type === 'checkbox' || type === 'radio' ) {
+			$this
+				.after( this.type )
+				.css({
+					'background' : '#000',
+					'color'      : '#fff'
+				});
+		} else {
+			$this
+				.attr( 'placeholder', this.type )
+				.css({
+					'background' : '#000',
+					'color'      : '#fff'
+				});
+		}
+	})
+}
+function selectAllInputs( withoutHidden ) {
+	var withoutHidden = withoutHidden || false,
+		addSelect     = withoutHidden ? ':visible' : '';
+
+	$(':input' + addSelect ).each(function() {
+		var
+			$this = $( this ),
+			type  = this.type;
+
+			console.log( type );
+
+		if( type === 'checkbox' || type === 'radio' ) {
+			$this
+				.after( this.type )
+				.css({
+					'background' : '#000',
+					'color'      : '#fff'
+				});
+		} else {
+			$this
+				.attr( 'placeholder', this.type )
+				.css({
+					'background' : '#000',
+					'color'      : '#fff'
+				});
+		}
+	})
 }
