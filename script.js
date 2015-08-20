@@ -100,3 +100,49 @@ function withCacheAppendMore() {
 
 	console.timeEnd('checkTest');
 }
+
+//each vs for
+function addElems() {
+	var
+		body = $('body'),
+		str  = '<ul>',
+		i;
+
+	for ( i = 0; i < 80; i++ ) {
+		str += '<li>This is ' + i + ' element';
+	};
+
+	str += '</ul>';
+
+	body.prepend( str );
+}
+
+function nativeFor() {
+	var
+		arr        = $('li'),
+		iterations = 100000;
+
+		console.time('Native Loop');
+		for(var z = 0; z < iterations; z++ ) {
+			var length = arr.length;
+
+			for(var i=0; i < length; i++){
+				arr[i];
+			}
+		}
+		console.timeEnd('Native Loop');
+}
+
+function jqueryEach() {
+	var
+		arr        = $('li'),
+		iterations = 100000;
+
+	console.time('jQuery Each');
+	for(var z = 0; z < iterations; z++ ) {
+		arr.each(function(i, val) {
+			this;
+		});
+	}
+	console.timeEnd('jQuery Each');
+}
